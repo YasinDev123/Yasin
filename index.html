@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | My Personal Blog Portfolio</title>
+    <title>About Me | My Personal Blog Portfolio</title>
     
     <!-- Bootstrap 5.3.0 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons (Meets Risk-Taking & Experimentation) -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -19,29 +19,30 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Dark Mode Override (Meets Value Creation & Innovation) */
+        /* Dark Mode Override */
         body.dark-mode {
             background-color: #1a202c;
             color: #e2e8f0;
         }
-        body.dark-mode .card {
+        body.dark-mode .card, body.dark-mode .list-group-item {
             background-color: #2d3748;
             color: #e2e8f0;
+            border-color: #4a5568;
         }
         body.dark-mode .text-muted {
             color: #cbd5e1 !important;
         }
 
-        /* Hero Section Styling with Animated Gradient (Meets Creativity & Originality) */
-        .hero-section {
+        /* Hero Mini Section */
+        .hero-mini {
             background: linear-gradient(-45deg, #0d6efd, #0096c7, #6f42c1, #e83e8c);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             color: white;
-            padding: 120px 0;
+            padding: 60px 0;
             margin-bottom: 40px;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
         }
 
         @keyframes gradientBG {
@@ -50,52 +51,36 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Advanced Card Hover Effects (Meets Creativity Criteria) */
-        .card {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            overflow: hidden;
+        /* Skills Badge Hover */
+        .badge-skill {
+            transition: all 0.3s ease;
+        }
+        .badge-skill:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+        }
+
+        /* Timeline Styling */
+        .timeline {
             position: relative;
+            border-left: 3px solid #0d6efd;
+            padding-left: 20px;
         }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2) !important;
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
         }
-        .card::after {
+        .timeline-item::before {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #0d6efd, #0096c7);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        .card:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* Icon Wrapper Styling */
-        .icon-box {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(13, 110, 253, 0.1);
-            color: #0d6efd;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 24px;
-            transition: 0.3s;
-        }
-        .card:hover .icon-box {
+            left: -28px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
             background-color: #0d6efd;
-            color: white;
-            transform: rotate(360deg);
+            border-radius: 50%;
         }
 
-        /* Footer Styling */
         footer {
             background-color: #1a202c;
             color: #a0aec0;
@@ -106,42 +91,23 @@
 </head>
 <body>
 
-<section class="hero-section text-center shadow">
-    <div class="container">
-        <img src="profile.jpg" alt="Gambar Profil Saya" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-        
-        <span class="badge bg-light text-primary mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase tracking-wider">Welcome To My Space</span>
-        </div>
-</section>
-
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold text-gradient" href="index.html">
+            <a class="navbar-brand fw-bold" href="index.html">
                 <i class="fa-solid fa-code me-2"></i> MyPortfolio.
             </a>
-            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About Me</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <!-- Dynamic Feature: Dark Mode Toggle (Meets Value Creation & Initiative) -->
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="about.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item ms-lg-3">
-                        <button class="btn btn-outline-light btn-sm id="darkModeToggle" onclick="toggleDarkMode()">
+                        <button class="btn btn-outline-light btn-sm" id="darkModeToggle" onclick="toggleDarkMode()">
                             <i id="themeIcon" class="fa-solid fa-moon"></i>
                         </button>
                     </li>
@@ -150,65 +116,59 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section text-center shadow">
+    <!-- Header Mini -->
+    <header class="hero-mini text-center shadow-sm">
         <div class="container">
-            <span class="badge bg-light text-primary mb-3 px-3 py-2 rounded-pill fw-bold text-uppercase tracking-wider">Welcome To My Space</span>
-            <h1 class="display-4 fw-bold mb-3">Welcome to My Personal Blog Portfolio</h1>
-            <p class="lead col-lg-8 mx-auto opacity-90">Hi there! I am a student at UniSZA. This digital space showcases my software development journey, projects, and learning experiences.</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                <a href="about.html" class="btn btn-light btn-lg px-4 gap-3 fw-bold text-primary shadow-sm">Get to Know Me</a>
-                <a href="blog.html" class="btn btn-outline-light btn-lg px-4">Read My Blog</a>
-            </div>
+            <h1 class="fw-bold">About Me</h1>
+            <p class="lead opacity-90">Get to know the person behind the code.</p>
         </div>
-    </section>
+    </header>
 
-    <!-- Main Content (Value Creation & Usability) -->
+    <!-- Main Content -->
     <main class="container my-5">
-        <div class="row text-center g-4">
-            
-            <!-- Card 1: About Me -->
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 rounded-4">
-                    <div class="card-body d-flex flex-column">
-                        <div class="icon-box">
-                            <i class="fa-solid fa-user-graduate"></i>
-                        </div>
-                        <h3 class="card-title h5 fw-bold mb-3">About Me</h3>
-                        <p class="card-text text-muted flex-grow-1">Discover my academic background at the Faculty of Informatics and Computing (FIK), UniSZA, and my passion for technology.</p>
-                        <a href="about.html" class="btn btn-outline-primary w-100 mt-auto rounded-pill">View Profile</a>
+        <div class="row g-5">
+            <!-- Left Column: Bio & Skills -->
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-sm p-4 rounded-4 text-center mb-4">
+                    <img src="profile.jpg" alt="Profile Picture" class="rounded-circle mx-auto mb-3 shadow" style="width: 150px; height: 150px; object-fit: cover;">
+                    <h2 class="h4 fw-bold">Your Name</h2>
+                    <p class="text-primary fw-semibold">Software Development Student</p>
+                    <p class="text-muted small">Faculty of Informatics and Computing (FIK), UniSZA</p>
+                    <hr>
+                    <p class="text-start">I am deeply passionate about building clean, efficient, and user-friendly web applications. Currently exploring advanced frontend frameworks and modern software development practices.</p>
+                </div>
+
+                <div class="card border-0 shadow-sm p-4 rounded-4">
+                    <h3 class="h5 fw-bold mb-3"><i class="fa-solid fa-laptop-code text-primary me-2"></i>Skills & Technologies</h3>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-primary badge-skill px-3 py-2 rounded-pill">HTML5 & CSS3</span>
+                        <span class="badge bg-primary badge-skill px-3 py-2 rounded-pill">Bootstrap 5</span>
+                        <span class="badge bg-primary badge-skill px-3 py-2 rounded-pill">JavaScript</span>
+                        <span class="badge bg-primary badge-skill px-3 py-2 rounded-pill">PHP</span>
+                        <span class="badge bg-primary badge-skill px-3 py-2 rounded-pill">MySQL</span>
+                        <span class="badge bg-primary badge-skill px-3 py-2 rounded-pill">Git & GitHub</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2: Blog -->
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 rounded-4">
-                    <div class="card-body d-flex flex-column">
-                        <div class="icon-box">
-                            <i class="fa-solid fa-book-open"></i>
+            <!-- Right Column: Education Timeline -->
+            <div class="col-lg-7">
+                <div class="card border-0 shadow-sm p-4 rounded-4 h-100">
+                    <h3 class="h5 fw-bold mb-4"><i class="fa-solid fa-graduation-cap text-primary me-2"></i>My Journey & Education</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4 class="h6 fw-bold mb-1">Universiti Sultan Zainal Abidin (UniSZA)</h4>
+                            <span class="badge bg-secondary mb-2">2024 - Present</span>
+                            <p class="text-muted small">Pursuing Bachelor/Diploma in Computer Science (Software Development). Learning special topics in system design, framework implementations, and agile methodologies.</p>
                         </div>
-                        <h3 class="card-title h5 fw-bold mb-3">My Blog</h3>
-                        <p class="card-text text-muted flex-grow-1">Read about my coding experiences, exploring the Bootstrap framework, and how I approach problem-solving.</p>
-                        <a href="blog.html" class="btn btn-outline-primary w-100 mt-auto rounded-pill">Explore Posts</a>
+                        <div class="timeline-item">
+                            <h4 class="h6 fw-bold mb-1">Encounter with Web Development</h4>
+                            <span class="badge bg-secondary mb-2">2023</span>
+                            <p class="text-muted small">Started learning basic HTML, CSS, and programming logic. Discovered the thrill of building interactive features and responsive layouts.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Card 3: Contact -->
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm p-4 rounded-4">
-                    <div class="card-body d-flex flex-column">
-                        <div class="icon-box">
-                            <i class="fa-solid fa-envelope-open-text"></i>
-                        </div>
-                        <h3 class="card-title h5 fw-bold mb-3">Get in Touch</h3>
-                        <p class="card-text text-muted flex-grow-1">Have any questions, project collaboration ideas, or just want to say hi? Feel free to drop a message.</p>
-                        <a href="contact.html" class="btn btn-outline-primary w-100 mt-auto rounded-pill">Contact Me</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </main>
 
@@ -223,14 +183,12 @@
     <!-- Bootstrap 5.3.0 Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript for Dark Mode (Meets Initiative, Innovation & Problem-Solving) -->
+    <!-- JavaScript for Dark Mode -->
     <script>
         function toggleDarkMode() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
-            
             body.classList.toggle('dark-mode');
-            
             if (body.classList.contains('dark-mode')) {
                 icon.className = 'fa-solid fa-sun';
                 localStorage.setItem('theme', 'dark');
@@ -239,8 +197,6 @@
                 localStorage.setItem('theme', 'light');
             }
         }
-
-        // Apply saved theme on load (Demonstrates high attention to UX / Value Creation)
         window.onload = function() {
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
