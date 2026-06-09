@@ -6,58 +6,106 @@
     <title>Blog | My Personal Blog Portfolio</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* Global Styles */
         body {
-            background-color: #f8f9fa;
+            background-color: #f4f7f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333333;
+            color: #2d3748;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Page Header Styling (Matches Hero theme color) */
+        /* Dark Mode Override (Consistent Theme Sync) */
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        body.dark-mode .card {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        body.dark-mode .text-muted {
+            color: #cbd5e1 !important;
+        }
+        body.dark-mode .text-dark {
+            color: #ffffff !important;
+        }
+
+        /* Page Header Styling with Animated Gradient (Matches Hero Theme) */
         .page-header {
-            background: linear-gradient(135deg, #0d6efd, #0096c7);
+            background: linear-gradient(-45deg, #0d6efd, #0096c7, #6f42c1, #e83e8c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             margin-bottom: 40px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
         }
 
-        /* Interactive Card Hover Effects (Matches index.html) */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Interactive Blog Card Styling */
         .card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            position: relative;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #0d6efd, #e83e8c);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .card:hover::after {
+            transform: scaleX(1);
         }
 
-        /* Badge or Category Tag Styling */
+        /* Badge Customization */
         .blog-badge {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 20px;
         }
 
-        /* Footer Styling (Matches index.html) */
+        /* Footer Styling */
         footer {
-            background-color: #212529;
-            color: #aaaaaa;
-            padding: 20px 0;
-            margin-top: 60px;
+            background-color: #1a202c;
+            color: #a0aec0;
+            padding: 30px 0;
+            margin-top: 80px;
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">MyPortfolio.</a>
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fa-solid fa-code me-2"></i>MyPortfolio.
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
@@ -70,15 +118,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-outline-light btn-sm" id="darkModeToggle" onclick="toggleDarkMode()">
+                            <i id="themeIcon" class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header class="page-header text-center">
+    <header class="page-header text-center shadow">
         <div class="container">
-            <h1 class="display-5 fw-bold">My Personal Blog</h1>
-            <p class="lead">A space where I share my thoughts, experiences, and technical journey in software development.</p>
+            <h1 class="display-5 fw-bold mb-2">My Personal Blog</h1>
+            <p class="lead opacity-90">A space where I share my thoughts, experiences, and technical journey in software development.</p>
         </div>
     </header>
 
@@ -87,39 +140,39 @@
             
             <div class="col-lg-9">
                 
-                <article class="card border-0 shadow-sm p-4 mb-4">
+                <article class="card border-0 shadow-sm p-4 mb-4 rounded-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="badge bg-primary blog-badge">Journey</span>
+                            <span class="badge bg-primary blog-badge"><i class="fa-solid fa-compass me-1"></i> Journey</span>
                             <small class="text-muted">June 1, 2026</small>
                         </div>
-                        <h2 class="card-title h3 fw-bold mb-3">My First Step into Software Development</h2>
+                        <h2 class="card-title h3 fw-bold mb-3 text-dark">My First Step into Software Development</h2>
                         <p class="card-text text-muted lead fs-6">
                             Welcome to my very first blog post! As an Informatics student at UniSZA, launching this personal web portfolio has been an exciting milestone. Building this page from scratch helped me practicalize core HTML concepts and explore how modern web architectures fit together. It's a small but significant step toward becoming a full-fledged developer.
                         </p>
                     </div>
                 </article>
 
-                <article class="card border-0 shadow-sm p-4 mb-4">
+                <article class="card border-0 shadow-sm p-4 mb-4 rounded-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="badge bg-success blog-badge">Technology</span>
+                            <span class="badge bg-success blog-badge"><i class="fa-solid fa-microchip me-1"></i> Technology</span>
                             <small class="text-muted">June 2, 2026</small>
                         </div>
-                        <h2 class="card-title h3 fw-bold mb-3">Why I Chose the Bootstrap Framework</h2>
+                        <h2 class="card-title h3 fw-bold mb-3 text-dark">Why I Chose the Bootstrap Framework</h2>
                         <p class="card-text text-muted lead fs-6">
                             For this individual project, I decided to challenge myself by integrating the Bootstrap 5 framework rather than relying purely on vanilla CSS. While memorizing component classes felt overwhelming initially, experimenting with its responsive utility systems opened my eyes. It streamlined layouts dramatically and effortlessly guaranteed mobile compatibility across various screen sizes.
                         </p>
                     </div>
                 </article>
 
-                <article class="card border-0 shadow-sm p-4 mb-4">
+                <article class="card border-0 shadow-sm p-4 mb-4 rounded-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span class="badge bg-warning text-dark blog-badge">Problem-Solving</span>
+                            <span class="badge bg-warning text-dark blog-badge"><i class="fa-solid fa-bug me-1"></i> Problem-Solving</span>
                             <small class="text-muted">June 3, 2026</small>
                         </div>
-                        <h2 class="card-title h3 fw-bold mb-3">Overcoming Bugs: A Problem-Solving Journey</h2>
+                        <h2 class="card-title h3 fw-bold mb-3 text-dark">Overcoming Bugs: A Problem-Solving Journey</h2>
                         <p class="card-text text-muted lead fs-6">
                             While constructing the contact page, my responsive navigation menu suddenly broke and refused to toggle on small viewports. Instead of panicking, I systematically debugged the issue: analyzing script execution and inspecting dependencies. I discovered a missing Bootstrap bundle script link in the head element. Fixing this minor bug was a great lesson in technical resilience and attention to detail.
                         </p>
@@ -133,11 +186,37 @@
 
     <footer class="text-center">
         <div class="container">
-            <p class="mb-0">&copy; 2026 Personal Blog Portfolio | CSD 34203 Special Topics in Software Development. All Rights Reserved.</p>
+            <p class="mb-2">&copy; 2026 Personal Blog Portfolio | CSD 34203 Special Topics in Software Development. All Rights Reserved.</p>
+            <small class="text-muted">Designed with <i class="fa-solid fa-heart text-danger"></i> by Yasin</small>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Apply saved theme instantly on page load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            }
+        }
+    </script>
 </body>
-</html>
 </html>
