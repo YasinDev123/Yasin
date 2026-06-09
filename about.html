@@ -6,72 +6,140 @@
     <title>About Me | My Personal Blog Portfolio</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* Global Styles */
         body {
-            background-color: #f8f9fa;
+            background-color: #f4f7f6;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333333;
+            color: #2d3748;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Page Header Styling (Matches index.html Hero theme color) */
+        /* Dark Mode Override (Consistent with index.html) */
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        body.dark-mode .card {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        body.dark-mode .text-muted {
+            color: #cbd5e1 !important;
+        }
+        body.dark-mode .text-dark {
+            color: #ffffff !important;
+        }
+        body.dark-mode .progress {
+            background-color: #4a5568;
+        }
+
+        /* Animated Gradient Header (Matches index.html Hero theme) */
         .page-header {
-            background: linear-gradient(135deg, #0d6efd, #0096c7);
+            background: linear-gradient(-45deg, #0d6efd, #0096c7, #6f42c1, #e83e8c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             margin-bottom: 40px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
         }
 
-        /* Interactive Card Hover Effects (Matches index.html) */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Interactive Card Styling */
         .card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
         }
 
-        /* Timeline Design for Education */
+        /* Profile Image Frame */
+        .profile-frame {
+            width: 150px;
+            height: 150px;
+            border: 4px solid #0d6efd;
+            padding: 5px;
+            transition: transform 0.5s ease;
+        }
+        .card:hover .profile-frame {
+            transform: rotate(5deg);
+        }
+
+        /* Premium Timeline Design */
         .timeline {
             border-left: 3px solid #0d6efd;
-            padding-left: 20px;
+            padding-left: 30px;
             position: relative;
         }
         .timeline-item {
             position: relative;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
         }
-        .timeline-item::before {
-            content: "";
+        .timeline-icon {
             position: absolute;
-            left: -27px;
-            top: 5px;
-            background-color: #0d6efd;
-            width: 12px;
-            height: 12px;
+            left: -43px;
+            top: 0;
+            background: #0d6efd;
+            color: white;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            border: 3px solid #f4f7f6;
+            transition: 0.3s;
+        }
+        body.dark-mode .timeline-icon {
+            border-color: #1a202c;
+        }
+        .timeline-item:hover .timeline-icon {
+            background: #e83e8c;
+            transform: scale(1.2);
         }
 
-        /* Footer Styling (Matches index.html) */
+        /* Custom Progress Bar Glow */
+        .progress {
+            border-radius: 10px;
+            overflow: visible;
+        }
+        .progress-bar {
+            border-radius: 10px;
+            position: relative;
+        }
+
+        /* Footer Styling */
         footer {
-            background-color: #212529;
-            color: #aaaaaa;
-            padding: 20px 0;
-            margin-top: 60px;
+            background-color: #1a202c;
+            color: #a0aec0;
+            padding: 30px 0;
+            margin-top: 80px;
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">MyPortfolio.</a>
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fa-solid fa-code me-2"></i>MyPortfolio.
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
@@ -84,113 +152,152 @@
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
+                    <li class="nav-item ms-lg-3">
+                        <button class="btn btn-outline-light btn-sm" id="darkModeToggle" onclick="toggleDarkMode()">
+                            <i id="themeIcon" class="fa-solid fa-moon"></i>
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <header class="page-header text-center">
+    <header class="page-header text-center shadow">
         <div class="container">
-            <h1 class="display-5 fw-bold">About Me</h1>
-            <p class="lead">Get to know my academic background, technical skills, and aspirations.</p>
+            <h1 class="display-5 fw-bold mb-2">About Me</h1>
+            <p class="lead opacity-90">Get to know my academic background, technical skills, and aspirations.</p>
         </div>
     </header>
 
-    <main class="container">
+    <main class="container my-5">
         <div class="row g-5">
             
             <div class="col-md-5">
-                <div class="card border-0 shadow-sm p-4 text-center">
-                    <div class="rounded-circle bg-secondary text-white mx-auto d-flex align-items-center justify-content-center mb-4" style="width: 140px; height: 140px; background: linear-gradient(135deg, #0d6efd, #0096c7) !important;">
-                        <span class="fs-1 fw-bold">MY</span>
-                    </div>
+                <div class="card border-0 shadow-sm p-4 text-center rounded-4">
                     
-                    <h2 class="h4 fw-bold">MUHAMMAD YASIN BIN SAFIAN</h2>
-                    <p class="text-primary fw-semibold">Software Development Student</p>
+                    <img src="profile.jpg" alt="Muhammad Yasin" class="rounded-circle profile-frame mx-auto d-block mb-4 object-cover" onerror="this.src='https://via.placeholder.com/150/0d6efd/ffffff?text=Yasin'">
+                    
+                    <h2 class="h4 fw-bold text-dark">MUHAMMAD YASIN BIN SAFIAN</h2>
+                    <p class="text-primary fw-semibold mb-2"><i class="fa-solid fa-laptop-code me-2"></i>Software Development Student</p>
+                    <span class="badge bg-light text-secondary border mb-3">UniSZA (FIK)</span>
                     <hr>
                     <p class="text-muted text-start">
                         I am currently pursuing my studies at the <strong>Faculty of Informatics and Computing (FIK), Universiti Sultan Zainal Abidin (UniSZA)</strong>. 
                         I have a deep interest in software development, particularly in front-end design and responsive web applications.
                     </p>
-                    <p class="text-muted text-start">
+                    <p class="text-muted text-start mb-4">
                         Through my academic projects, I constantly look for creative ways to build meaningful digital experiences and solve real-world technical problems.
                     </p>
+                    
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="contact.html" class="btn btn-sm btn-primary rounded-pill px-3"><i class="fa-solid fa-paper-plane me-2"></i>Hire Me</a>
+                    </div>
                 </div>
             </div>
 
             <div class="col-md-7">
                 
                 <div class="mb-5">
-                    <h3 class="fw-bold text-dark mb-4">Education History</h3>
+                    <h3 class="fw-bold text-dark mb-4"><i class="fa-solid fa-graduation-cap text-primary me-2"></i>Education History</h3>
                     <div class="timeline">
                         <div class="timeline-item">
+                            <div class="timeline-icon"><i class="fa-solid fa-university"></i></div>
                             <h4 class="h5 fw-bold text-primary mb-1">Universiti Sultan Zainal Abidin (UniSZA)</h4>
-                            <span class="badge bg-secondary mb-2">Current Student</span>
-                            <p class="text-muted mb-0">Faculty of Informatics and Computing (FIK)<br>Coursework focuses on Programming Concepts, Software Engineering, and Web Development.</p>
+                            <span class="badge bg-success mb-2">Current Student (2024 - Present)</span>
+                            <p class="text-muted mb-0">Faculty of Informatics and Computing (FIK)<br>Coursework focuses on Advanced Programming Concepts, Software Engineering Principles, and Data Structures.</p>
                         </div>
                         <div class="timeline-item">
+                            <div class="timeline-icon"><i class="fa-solid fa-school"></i></div>
                             <h4 class="h5 fw-bold text-dark mb-1">Secondary School / Matriculation</h4>
-                            <span class="badge bg-light text-dark mb-2">Graduated</span>
-                            <p class="text-muted mb-0">Completed foundational studies with a strong interest in Information Technology and computer sciences.</p>
+                            <span class="badge bg-secondary mb-2">Graduated</span>
+                            <p class="text-muted mb-0">Completed foundational studies with a strong interest in Information Technology, mathematics, and computer sciences.</p>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="fw-bold text-dark mb-4">Technical Skills</h3>
+                    <h3 class="fw-bold text-dark mb-4"><i class="fa-solid fa-sliders text-primary me-2"></i>Technical Skills</h3>
                     
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
                             <span class="fw-semibold text-muted">HTML5 & CSS3</span>
-                            <span class="text-muted">85%</span>
+                            <span class="badge bg-success-subtle text-success">85%</span>
                         </div>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
                             <span class="fw-semibold text-muted">Bootstrap Framework</span>
-                            <span class="text-muted">80%</span>
+                            <span class="badge bg-primary-subtle text-primary">80%</span>
                         </div>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
                             <span class="fw-semibold text-muted">JavaScript (Basic Interaction)</span>
-                            <span class="text-muted">60%</span>
+                            <span class="badge bg-warning-subtle text-warning-emphasis">60%</span>
                         </div>
-                        <div class="progress" style="height: 10px;">
+                        <div class="progress" style="height: 8px;">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <div class="d-flex justify-content-between mb-1">
                             <span class="fw-semibold text-muted">Git & GitHub</span>
-                            <span class="text-muted">75%</span>
+                            <span class="badge bg-dark-subtle text-dark-emphasis">75%</span>
                         </div>
-                        <div class="progress" style="height: 10px;">
+                        <div class="progress" style="height: 8px;">
                             <div class="progress-bar bg-dark" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                 </div>
-
             </div>
         </div>
     </main>
 
     <footer class="text-center">
         <div class="container">
-            <p class="mb-0">&copy; 2026 Personal Blog Portfolio | CSD 34203 Special Topics in Software Development. All Rights Reserved.</p>
+            <p class="mb-2">&copy; 2026 Personal Blog Portfolio | CSD 34203 Special Topics in Software Development. All Rights Reserved.</p>
+            <small class="text-muted">Designed with <i class="fa-solid fa-heart text-danger"></i> by Yasin</small>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.className = 'fa-solid fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Apply theme instantly on load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            }
+        }
+    </script>
 </body>
 </html>
